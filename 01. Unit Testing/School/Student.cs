@@ -46,9 +46,10 @@
 		}
 		
 		//Constructors
-		public Student()
+		public Student(string name, int number)
 		{
-						
+			this.Name = name;
+			this.Number = number;
 		}
 	}
 }

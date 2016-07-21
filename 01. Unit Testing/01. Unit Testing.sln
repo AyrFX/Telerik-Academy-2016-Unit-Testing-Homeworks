@@ -2,7 +2,9 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 # SharpDevelop 5.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentsAndCourses", "StudentsAndCourses\StudentsAndCourses.csproj", "{C8B8B381-37A5-4195-A6EB-79BC1059DB69}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "School", "School\School.csproj", "{41E835DC-5FE8-49BC-A589-7C3B20D33CE6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "School.Tests", "School.Tests\School.Tests.csproj", "{BF27D99D-F130-4D16-8895-1FCCCC86EF48}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -10,9 +12,13 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C8B8B381-37A5-4195-A6EB-79BC1059DB69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C8B8B381-37A5-4195-A6EB-79BC1059DB69}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C8B8B381-37A5-4195-A6EB-79BC1059DB69}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C8B8B381-37A5-4195-A6EB-79BC1059DB69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41E835DC-5FE8-49BC-A589-7C3B20D33CE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41E835DC-5FE8-49BC-A589-7C3B20D33CE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41E835DC-5FE8-49BC-A589-7C3B20D33CE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41E835DC-5FE8-49BC-A589-7C3B20D33CE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF27D99D-F130-4D16-8895-1FCCCC86EF48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF27D99D-F130-4D16-8895-1FCCCC86EF48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF27D99D-F130-4D16-8895-1FCCCC86EF48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF27D99D-F130-4D16-8895-1FCCCC86EF48}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
