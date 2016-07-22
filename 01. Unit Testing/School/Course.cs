@@ -14,10 +14,6 @@
 			{
 				return this.students;
 			}
-			private set
-			{
-				students = value;
-			}
 		}
 		
 		//Constructors

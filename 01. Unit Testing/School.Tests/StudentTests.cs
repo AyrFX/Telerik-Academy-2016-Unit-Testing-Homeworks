@@ -33,21 +33,17 @@
 		}
 		
 		[Test]
-		public void TheNameOfTheStudentEqualsToRealStudentName()
+		public void TheNameOfTheStudentEqualsToGivenStudentName()
 		{
-			voidMethodDelegate currentDelegate = CheckStudentNameGetter;
-			Assert.That(currentDelegate("ABCD"), Is.EqualTo(true));
+			var student = new Student("ABCD", 20000);
+			Assert.That(student.Name, Is.EqualTo("ABCD"));
 		}
 		
-		public delegate bool voidMethodDelegate(string name);
-		public static bool CheckStudentNameGetter(string name)
+		[Test]
+		public void TheNumberOfTheStudentEqualsToGivenStudentNumber()
 		{
-			var student = new Student(name, 20000);
-			if (name != student.Name)
-			{
-				return false;
-			}
-			return true;
+			var student = new Student("ABCD", 20000);
+			Assert.That(student.Number, Is.EqualTo(20000));
 		}
 	}
 }
