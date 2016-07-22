@@ -59,7 +59,7 @@
     </Module>
     <Module hash="EF-F7-1A-67-EC-E9-13-95-68-A9-54-84-1F-53-E8-55-A5-1E-6E-C7">
       <Summary numSequencePoints="79" visitedSequencePoints="79" numBranchPoints="27" visitedBranchPoints="25" sequenceCoverage="100" branchCoverage="92.59" maxCyclomaticComplexity="2" minCyclomaticComplexity="1" />
-      <FullName>E:\Temp\nunit20\ShadowCopyCache\7320_636047871472185922\Tests_11816592\assembly\dl3\1b88cbe9\f09cb306_fbe3d101\School.Tests.dll</FullName>
+      <FullName>E:\Temp\nunit20\ShadowCopyCache\8244_636047912079736282\Tests_15877329\assembly\dl3\8b4a5d53\f09cb306_fbe3d101\School.Tests.dll</FullName>
       <ModuleName>School.Tests</ModuleName>
       <Files>
         <File uid="1" fullPath="c:\A\Tools\TA\TA Tasks\Unit-Testing\01. Unit Testing\School.Tests\CourseTests.cs" />
@@ -360,13 +360,13 @@
       </Classes>
     </Module>
     <Module skippedDueTo="MissingPdb" hash="69-89-67-69-A6-E1-FC-1B-90-A9-E2-01-18-6B-7E-8C-4A-9A-F6-B8">
-      <FullName>E:\Temp\nunit20\ShadowCopyCache\7320_636047871472185922\Tests_11816592\assembly\dl3\b568bef8\d3333321_4ee3d101\nunit.framework.dll</FullName>
+      <FullName>E:\Temp\nunit20\ShadowCopyCache\8244_636047912079736282\Tests_15877329\assembly\dl3\aa19d363\d3333321_4ee3d101\nunit.framework.dll</FullName>
       <ModuleName>nunit.framework</ModuleName>
       <Classes />
     </Module>
     <Module hash="16-F4-65-98-83-94-7F-40-2F-43-57-81-17-B5-4F-8D-21-32-45-1D">
       <Summary numSequencePoints="47" visitedSequencePoints="47" numBranchPoints="18" visitedBranchPoints="17" sequenceCoverage="100" branchCoverage="94.44" maxCyclomaticComplexity="3" minCyclomaticComplexity="1" />
-      <FullName>E:\Temp\nunit20\ShadowCopyCache\7320_636047871472185922\Tests_11816592\assembly\dl3\3b999896\370074c0_fae3d101\School.dll</FullName>
+      <FullName>E:\Temp\nunit20\ShadowCopyCache\8244_636047912079736282\Tests_15877329\assembly\dl3\8a0468b0\370074c0_fae3d101\School.dll</FullName>
       <ModuleName>School</ModuleName>
       <Files>
         <File uid="9" fullPath="c:\A\Tools\TA\TA Tasks\Unit-Testing\01. Unit Testing\School\Course.cs" />
