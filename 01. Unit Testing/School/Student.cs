@@ -7,10 +7,12 @@
 		//Fields
 		private string name;
 		private int number;
+		private static int currentNumber = 10000;
 		
 		//Properties
 		public string Name {
-			get {
+			get
+			{
 				return this.name;
 			}
 			set
@@ -32,24 +34,27 @@
 			{
 				return this.number;
 			}
-			set
-			{
-				if (10000 <= value && value < 99999)
+		}
+		
+		//Constructors
+		public Student(string name)
+		{
+			this.Name = name;
+			if (10000 <= Student.currentNumber && Student.currentNumber < 99999)
 				{
-					this.number = value;
+					this.number = currentNumber;
 				}
 				else
 				{
 					throw new ArgumentException("The number should be between 10000 and 99999");
 				}
-			}
+			Student.currentNumber++;
 		}
 		
-		//Constructors
-		public Student(string name, int number)
+		//Methods
+		public static void InitializeNumber()
 		{
-			this.Name = name;
-			this.Number = number;
+			Student.currentNumber = 10000;
 		}
 	}
 }

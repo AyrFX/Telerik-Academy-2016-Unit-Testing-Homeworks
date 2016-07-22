@@ -13,9 +13,9 @@
 			var course = new Course();
 			for (int i = 0; i < 30; i++)
 			{
-				course.JoinStudent(new Student("A", 10000+i));
+				course.JoinStudent(new Student("A"));
 			}
-			Assert.That(() => { course.JoinStudent(new Student("A", 10031)); }, Throws.Exception.TypeOf<OverflowException>());
+			Assert.That(() => { course.JoinStudent(new Student("A")); }, Throws.Exception.TypeOf<OverflowException>());
 		}
 		
 		[Test]
@@ -24,7 +24,7 @@
 			var course = new Course();
 			for (int i = 0; i < 20; i++)
 			{
-				course.JoinStudent(new Student("A", 10000+i));
+				course.JoinStudent(new Student("A"));
 			}
 			Assert.That(course.Students.Count, Is.EqualTo(20));
 		}
@@ -35,7 +35,7 @@
 			var course = new Course();
 			for (int i = 0; i < 10; i++)
 			{
-				course.JoinStudent(new Student("A", 10000+i));
+				course.JoinStudent(new Student("A"));
 			}
 			
 			var studentsList = course.Students;
@@ -48,7 +48,7 @@
 			var course = new Course();
 			for (int i = 0; i < 10; i++)
 			{
-				course.JoinStudent(new Student("A", 10000+i));
+				course.JoinStudent(new Student("A"));
 			}
 			
 			var studentToLeave = course.Students[4];

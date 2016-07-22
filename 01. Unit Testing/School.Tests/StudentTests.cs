@@ -11,39 +11,42 @@
 		[Test]
 		public void StudentNameShouldNotBeEmpty()
 		{
-			Assert.That(() => { var student = new Student("", 3); }, Throws.ArgumentException);
+			Assert.That(() => { var student = new Student(""); }, Throws.ArgumentException);
 		}
 		
 		[Test]
-		public void StudentNumberShouldBeGreatherThan9999()
+		public void AssignedStudentNumberIncrementsCorrectly()
 		{
-			Assert.That(() => { var student = new Student("A", 3); }, Throws.ArgumentException);
-		}
-		
-		[Test]
-		public void StudentNumberShouldBeLessThan100000()
-		{
-			Assert.That(() => { var student = new Student("A", 100000); }, Throws.ArgumentException);
+			Student.InitializeNumber();
+			var firstStudent = new Student("ABCD");
+			var secondStudent = new Student("ABCD");
+			Assert.That(firstStudent.Number, Is.EqualTo(secondStudent.Number - 1));
 		}
 		
 		[Test]
 		public void CreateStudentByValidData()
 		{
-			Assert.That(() => { var student = new Student("A", 55555); }, Throws.Nothing);
+			Student.InitializeNumber();
+			Assert.That(() => { var student = new Student("A"); }, Throws.Nothing);
 		}
 		
 		[Test]
 		public void TheNameOfTheStudentEqualsToGivenStudentName()
 		{
-			var student = new Student("ABCD", 20000);
+			Student.InitializeNumber();
+			var student = new Student("ABCD");
 			Assert.That(student.Name, Is.EqualTo("ABCD"));
 		}
 		
 		[Test]
-		public void TheNumberOfTheStudentEqualsToGivenStudentNumber()
+		public void AddingMoreThan89999StudentThrowsException()
 		{
-			var student = new Student("ABCD", 20000);
-			Assert.That(student.Number, Is.EqualTo(20000));
+			Student.InitializeNumber();
+			Student student;
+			for (int i = 0; i < 89999; i++) {
+				student = new Student("ABCD"); 
+			}
+			Assert.That(() => { student = new Student("ABCD"); }, Throws.ArgumentException);
 		}
 	}
 }
