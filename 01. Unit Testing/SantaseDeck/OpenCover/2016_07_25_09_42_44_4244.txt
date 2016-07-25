@@ -1,0 +1,3 @@
+Deck.Tests.DeckTests.TrumpCardShouldBeNonNullable
+Deck.Tests.DeckTests.TrumpCardShouldBeRandom
+Deck.Tests.DeckTests.CardsLeftShouldBe24ForANewDeck

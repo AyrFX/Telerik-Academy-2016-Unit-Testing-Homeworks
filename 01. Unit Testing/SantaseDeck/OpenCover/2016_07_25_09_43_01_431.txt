@@ -1,0 +1,3 @@
+Deck.Tests.DeckTests.CardsLeftShouldBe23AfterDrawingOneCard
+Deck.Tests.DeckTests.CardsLeftShouldBe0AfterDrawing24Cards
+Deck.Tests.DeckTests.GetNextCardShouldThrowExceptionWhenCalled25Times

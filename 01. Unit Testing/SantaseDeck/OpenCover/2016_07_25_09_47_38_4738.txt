@@ -1,0 +1,3 @@
+Deck.Tests.DeckTests.GetNextCardShouldReturnDifferentNonNullCardEveryTime
+Deck.Tests.DeckTests.ChangeTrumpCardShouldWorkProperly
+Deck.Tests.DeckTests.ChangeTrumpCardShouldChangeTheLastCardInTheDeck

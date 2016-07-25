@@ -1,0 +1,1 @@
+Deck.Tests.DeckTests.CardsLeftShouldBe0AfterDrawing24Cards
