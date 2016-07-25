@@ -1,10 +1,13 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
-# SharpDevelop 5.1
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "School", "School\School.csproj", "{41E835DC-5FE8-49BC-A589-7C3B20D33CE6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "School.Tests", "School.Tests\School.Tests.csproj", "{BF27D99D-F130-4D16-8895-1FCCCC86EF48}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "School.Tests.NUnit", "School.Tests\School.Tests.NUnit.csproj", "{BF27D99D-F130-4D16-8895-1FCCCC86EF48}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "School.Tests.VSTT", "School.Tests.VSTT\School.Tests.VSTT.csproj", "{28C3F87D-4BEA-4363-BF9F-F223F81259D6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,5 +23,12 @@ Global
 		{BF27D99D-F130-4D16-8895-1FCCCC86EF48}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF27D99D-F130-4D16-8895-1FCCCC86EF48}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BF27D99D-F130-4D16-8895-1FCCCC86EF48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28C3F87D-4BEA-4363-BF9F-F223F81259D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28C3F87D-4BEA-4363-BF9F-F223F81259D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28C3F87D-4BEA-4363-BF9F-F223F81259D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28C3F87D-4BEA-4363-BF9F-F223F81259D6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal
