@@ -15,7 +15,7 @@ namespace Poker
 
         public override string ToString()
         {
-            throw new NotImplementedException();
+            return this.Face + " of " + this.Suit;
         }
     }
 }
