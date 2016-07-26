@@ -14,7 +14,15 @@ namespace Poker
 
         public override string ToString()
         {
-            throw new NotImplementedException();
+        	string result = "";
+        	for (int i = 0; i < this.Cards.Count; i++) {
+        		result += this.Cards[i].ToString();
+        		if (i != this.Cards.Count - 1)
+        		{
+        			result += ", ";
+        		}
+        	}
+        	return result;
         }
     }
 }

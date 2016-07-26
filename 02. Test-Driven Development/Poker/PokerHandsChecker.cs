@@ -6,7 +6,26 @@ namespace Poker
     {
         public bool IsValidHand(IHand hand)
         {
-            throw new NotImplementedException();
+        	if (hand.Cards == null)
+        	{
+        		return false;
+        	}
+        	
+        	if (hand.Cards.Count != 5)
+        	{
+        		return false;
+        	}
+        	
+        	for (int i = 0; i < hand.Cards.Count; i++) {
+        		for (int j = i+1; j < hand.Cards.Count; j++) {
+        			if (hand.Cards[i].Face == hand.Cards[j].Face &&
+        			    hand.Cards[i].Suit == hand.Cards[j].Suit)
+        			{
+        				return false;
+        			}
+        		}
+        	}
+        	return true;
         }
 
         public bool IsStraightFlush(IHand hand)
@@ -16,7 +35,32 @@ namespace Poker
 
         public bool IsFourOfAKind(IHand hand)
         {
-            throw new NotImplementedException();
+            if (!this.IsValidHand(hand))
+        	{
+        		return false;
+        	}
+            
+            CardFace currentFace;
+			byte currentFaceCount;
+			for (int i = 0; i < hand.Cards.Count; i++) {
+				currentFace = hand.Cards[i].Face;
+				currentFaceCount = 1;
+				for (int j = 0; j < hand.Cards.Count; j++) {
+					if (i == j)
+					{
+						continue;
+					}
+					if (currentFace == hand.Cards[j].Face)
+					{
+						currentFaceCount += 1;
+					}
+				}
+				if (currentFaceCount >= 4) {
+					return true;
+				}
+			}
+            
+			return false;
         }
 
         public bool IsFullHouse(IHand hand)
@@ -26,7 +70,20 @@ namespace Poker
 
         public bool IsFlush(IHand hand)
         {
-            throw new NotImplementedException();
+        	if (!this.IsValidHand(hand))
+        	{
+        		return false;
+        	}
+        	
+        	var firstCardSuit = hand.Cards[0].Suit;
+        	for (int i = 1; i < hand.Cards.Count; i++) {
+        		if (hand.Cards[i].Suit != firstCardSuit)
+        		{
+        			return false;
+        		}
+        	}
+        	
+        	return true;
         }
 
         public bool IsStraight(IHand hand)
