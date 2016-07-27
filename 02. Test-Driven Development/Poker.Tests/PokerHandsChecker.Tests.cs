@@ -51,15 +51,31 @@
 		}
 		
 		[Test]
+        [Repeat(100)]
 		public void IsValidShouldReturnTrueIfCardsAre5()
 		{
 			var cardsSet = new List<ICard>();
 			var generator = new Random();
-			for (int i = 0; i < 5; i++)
+			while (cardsSet.Count < 5)
 			{
 				var face = (CardFace)generator.Next(2, 14);
 				var suit = (CardSuit)generator.Next(1, 4);
-				cardsSet.Add(new Card(face, suit));
+                var currentCard = new Card(face, suit);
+                bool shouldAdd = true;
+                for (int j = 0; j < cardsSet.Count; j++)
+                {
+                    if (cardsSet[j].Face == currentCard.Face
+                        && cardsSet[j].Suit == currentCard.Suit)
+                    {
+                        shouldAdd = false;
+                        break;
+                    }
+                }
+
+                if (shouldAdd)
+                {
+                    cardsSet.Add(currentCard);
+                }
 			}
 			
 			var hand = new Hand(cardsSet);
