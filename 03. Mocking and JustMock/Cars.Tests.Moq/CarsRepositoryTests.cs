@@ -18,78 +18,60 @@ namespace Cars.Tests.Moq
         {
             //Arrange
             var mockedDatabase = new Mock<IDatabase>();
+            mockedDatabase.Setup(x => x.Cars).Returns(new List<Car>());
 
             //Act
             var repository = new CarsRepository(mockedDatabase.Object);
 
             //Assert
-            Mock.Verify(mockedDatabase);
-        }
-
-        [TestMethod]
-        public void CarRepositoryConstructorWithoutParameterShouldCreateObjectsProperly()
-        {
-            //Arrange
-            var mockedCarsRepository = new Mock<ICarsRepository>();
-            mockedCarsRepository.Setup(x => x.Add(It.IsAny<Car>()));
-
-            //Act & Assert
-            mockedCarsRepository.Setup(x => x.All());
+            mockedDatabase.Verify();
         }
 
         [TestMethod]
         public void CarsRepositoryTotalShouldReturnExpectedNumberOfCards()
         {
             //Arrange
-            var database = new Database();
-            database.Cars = new List<Car>();
+            var mockedDatabase = new Mock<IDatabase>();
+            mockedDatabase.Setup(x => x.Cars).Returns(new List<Car>());
 
-            var repository = new CarsRepository(database);
-
-            //Act
+            var repository = new CarsRepository(mockedDatabase.Object);
             for (int i = 0; i < 10; i++)
             {
                 repository.Add(new Car());
             }
-
-            //Assert
+            
+            //Act & Assert
             Assert.AreEqual(repository.TotalCars, 10);
         }
 
         [TestMethod]
-        public void CarsRepositoryShouldAddToDatabaseWhenAddingCars()
+        [ExpectedException(typeof(ArgumentException))]
+        public void CarsRepositoryShouldThrowArgumentExceptionByPassingNullCarToAdd()
         {
             //Arrange
-            var mockedDatabase = new Mock<IDatabase>();
-            var car = new Car();
-            mockedDatabase.Setup(x => x.Cars.Add(car));
+            var repository = new CarsRepository();
 
-            var repository = new CarsRepository(mockedDatabase.Object);
-
-            //Act
-            repository.Add(car);
-            repository.Add(car);
-            repository.Add(car);
-
-            //Assert
-            mockedDatabase.Verify(x => x.Cars.Add(car), Times.Exactly(3));
+            //Act & Assert
+            repository.Add(null);
         }
 
         [TestMethod]
-        public void CarsRepositoryShouldRemoveFromDatabaseWhenRemovingCars()
+        public void CarsRepositoryShouldAddToDatabaseEachTimeWhenAddingCars()
         {
             //Arrange
             var mockedDatabase = new Mock<IDatabase>();
-            mockedDatabase.Setup(x => x.Cars.Remove(It.IsAny<Car>()));
-
+            mockedDatabase.Setup(x => x.Cars).Returns(new List<Car>());
+            mockedDatabase.Setup(x => x.Cars.Add(It.IsAny<Car>())).Verifiable();
+            
             var repository = new CarsRepository(mockedDatabase.Object);
 
             //Act
-
-            repository.Remove(new Car());
+            repository.Add(new Car());
+            repository.Add(new Car());
+            repository.Add(new Car());
 
             //Assert
-            mockedDatabase.Verify(x => x.Cars.Remove(It.IsAny<Car>()), Times.Exactly(1));
+            mockedDatabase.Verify(x => x.Cars.Add(It.IsAny<Car>()), Times.Exactly(3));
         }
 
         [TestMethod]
@@ -104,23 +86,21 @@ namespace Cars.Tests.Moq
         }
 
         [TestMethod]
-        public void CarsRepositoryGetByIdShouldReturnExistingCar()
+        public void CarsRepositoryShouldRemoveFromDatabaseWhenRemovingCars()
         {
             //Arrange
-            var database = new Database();
-            database.Cars = new List<Car>();
-            var car = new Car();
-            car.Id = 5;
+            var mockedDatabase = new Mock<IDatabase>();
+            mockedDatabase.Setup(x => x.Cars).Returns(new List<Car>());
 
-            var repository = new CarsRepository(database);
-            repository.Add(car);
+            var repository = new CarsRepository(mockedDatabase.Object);
 
             //Act
-
-            var result = repository.GetById(5);
+            var car = new Car();
+            repository.Add(car);
+            repository.Remove(car);
 
             //Assert
-            Assert.AreSame(car, result);
+            Assert.AreEqual(mockedDatabase.Object.Cars.Count, 0);
         }
 
         [TestMethod]
@@ -128,35 +108,232 @@ namespace Cars.Tests.Moq
         public void CarsRepositoryGetByIdShouldReturnThrowArgumentExceptionByPassingNullCar()
         {
             //Arrange
-            var database = new Database();
-            database.Cars = new List<Car>();
-            var car = new Car();
-            car.Id = 5;
+            var mockedDatabase = new Mock<IDatabase>();
+            mockedDatabase.Setup(x => x.Cars).Returns(new List<Car>());
 
-            var repository = new CarsRepository(database);
-            repository.Add(car);
+            var repository = new CarsRepository(mockedDatabase.Object);
 
             //Act & Assert
             var result = repository.GetById(10);
         }
 
         [TestMethod]
-        public void CarsRepositoryAllShouldCallDatabase()
+        public void CarsRepositoryGetByIdShouldReturnExistingCar()
         {
             //Arrange
-            var database = new Database();
-            database.Cars = new List<Car>();
+            var mockedDatabase = new Mock<IDatabase>();
+            mockedDatabase.Setup(x => x.Cars).Returns(new List<Car>());
+
             var car = new Car();
             car.Id = 5;
 
-            var repository = new CarsRepository(database);
+            var repository = new CarsRepository(mockedDatabase.Object);
             repository.Add(car);
+
+            //Act
+            var result = repository.GetById(5);
+
+            //Assert
+            Assert.AreSame(car, result);
+        }
+
+        [TestMethod]
+        public void CarsRepositoryAllShouldCallDatabase()
+        {
+            //Arrange
+            var mockedDatabase = new Mock<IDatabase>();
+            mockedDatabase.Setup(x => x.Cars).Returns(new List<Car>());
+
+            var repository = new CarsRepository(mockedDatabase.Object);
+
+            for (int i = 0; i < 10; i++)
+            {
+                repository.Add(new Car());
+            }
 
             //Act
             var result = repository.All();
 
             //Assert
-            Assert.IsInstanceOfType(result, typeof(List<Car>));
+            Assert.IsInstanceOfType(result, typeof(ICollection<Car>));
+            //mockedDatabase.Verify();
+        }
+
+        [TestMethod]
+        public void CarsRepositorySortedByMakeShouldReturnSortedList()
+        {
+            //Arrange
+            var mockedDatabase = new Mock<IDatabase>();
+            mockedDatabase.Setup(x => x.Cars).Returns(new List<Car>());
+
+            var repository = new CarsRepository(mockedDatabase.Object);
+
+            repository.Add(new Car()
+            {
+                Id = 1,
+                Make = "Citroen",
+                Model = "C4",
+                Year = 2012
+            });
+            repository.Add(new Car()
+            {
+                Id = 2,
+                Make = "Audi",
+                Model = "S6",
+                Year = 2015
+            });
+            repository.Add(new Car()
+            {
+                Id = 3,
+                Make = "BMW",
+                Model = "X1",
+                Year = 2014
+            });
+            repository.Add(new Car()
+            {
+                Id = 4,
+                Make = "Fiat",
+                Model = "Panda",
+                Year = 2016
+            });
+
+            //Act
+            var result = (List<Car>)repository.SortedByMake();
+            bool areSorted = true;
+
+            //Assert
+            for (int i = 1; i < result.Count; i++)
+            {
+                if (result[i - 1].Make.CompareTo(result[i].Make) < 0)
+                {
+                    continue;
+                }
+                else
+                {
+                    areSorted = false;
+                    break;
+                }
+            }
+
+            Assert.IsTrue(areSorted);
+        }
+
+        [TestMethod]
+        public void CarsRepositorySortedByYearShouldReturnSortedList()
+        {
+            //Arrange
+            var mockedDatabase = new Mock<IDatabase>();
+            mockedDatabase.Setup(x => x.Cars).Returns(new List<Car>());
+
+            var repository = new CarsRepository(mockedDatabase.Object);
+
+            repository.Add(new Car()
+            {
+                Id = 1,
+                Make = "Citroen",
+                Model = "C4",
+                Year = 2012
+            });
+            repository.Add(new Car()
+            {
+                Id = 2,
+                Make = "Audi",
+                Model = "S6",
+                Year = 2015
+            });
+            repository.Add(new Car()
+            {
+                Id = 3,
+                Make = "BMW",
+                Model = "X1",
+                Year = 2014
+            });
+            repository.Add(new Car()
+            {
+                Id = 4,
+                Make = "Fiat",
+                Model = "Panda",
+                Year = 2016
+            });
+
+            //Act
+            var result = (List<Car>)repository.SortedByYear();
+            bool areSorted = true;
+
+            //Assert
+            for (int i = 1; i < result.Count; i++)
+            {
+                if (result[i - 1].Year > result[i].Year)
+                {
+                    continue;
+                }
+                else
+                {
+                    areSorted = false;
+                    break;
+                }
+            }
+
+            Assert.IsTrue(areSorted);
+        }
+
+        [TestMethod]
+        public void CarsRepositorySearchShouldReturnListWithPassingItems()
+        {
+            //Arrange
+            var mockedDatabase = new Mock<IDatabase>();
+            mockedDatabase.Setup(x => x.Cars).Returns(new List<Car>());
+
+            var repository = new CarsRepository(mockedDatabase.Object);
+
+            repository.Add(new Car()
+            {
+                Id = 1,
+                Make = "Citroen",
+                Model = "C4",
+                Year = 2012
+            });
+            repository.Add(new Car()
+            {
+                Id = 2,
+                Make = "Audi",
+                Model = "S6",
+                Year = 2015
+            });
+            repository.Add(new Car()
+            {
+                Id = 3,
+                Make = "BMW",
+                Model = "X1",
+                Year = 2014
+            });
+            repository.Add(new Car()
+            {
+                Id = 4,
+                Make = "Fiat",
+                Model = "Panda",
+                Year = 2016
+            });
+
+            //Act
+            var result = (List<Car>)repository.Search("X1");
+            bool allPassing = true;
+
+            //Assert
+            for (int i = 0; i < result.Count; i++)
+            {
+                if (result[i].Make.IndexOf("X1") > -1 || result[i].Model.IndexOf("X1") > -1)
+                {
+                    continue;
+                }
+                else
+                {
+                    allPassing = false;
+                    break;
+                }
+            }
+
+            Assert.IsTrue(allPassing);
         }
     }
 }
